@@ -1,0 +1,24 @@
+.wrap-banner{
+  position: relative;
+  user-select: none;
+  display: flex;
+}
+
+.title-banner{
+  position: absolute;
+  left: 30px;
+  bottom: 110px;
+}
+
+.span-banner{
+  position: absolute;
+  left: 30px;
+  bottom: 100px;
+}
+
+@media (max-width: 1200px){
+  .title-banner,
+  .span-banner{
+    display: none;
+  }
+}

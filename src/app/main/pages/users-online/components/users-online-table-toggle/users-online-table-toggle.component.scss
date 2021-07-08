@@ -1,0 +1,52 @@
+@import '../../../../../../colorss.scss';
+
+.card-container{
+  background-color: #F8F8F8;
+  width: 95%;
+  margin: 0px auto;
+  padding: 10px;
+  border-radius: 5px;
+  user-select: none;
+
+  .card-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  p{
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .bold{
+    font-weight: 500;
+  }
+
+  .row-data p{
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .name{
+    color: $primary;
+  }
+
+  .detail{
+    overflow: hidden;
+
+    .blue{
+      color: $primary;
+    }
+
+    .m-0{
+      margin: 0;
+    }
+  }
+}
+
+.divider{
+  width: 95%;
+  margin: 0px auto;
+}

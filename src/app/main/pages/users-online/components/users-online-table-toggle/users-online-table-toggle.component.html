@@ -1,0 +1,111 @@
+<mat-divider class="divider"></mat-divider>
+<div class="card-container">
+  <div class="row middle-xs center-xs">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <img src="assets/images/shop.svg" alt="logo" class="card-image" />
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <p class="bold">Dining - Asadero Room</p>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <p>10 Dispositivos</p>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <p>11 Personas</p>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+      <p>Ocupación 50 max.</p>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 row middle-xs center-xs">
+      <mat-icon svgIcon="man-green"></mat-icon>&nbsp;
+      <p class="bold">20%</p>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+      <button mat-icon-button color="primary" (click)="toggle()">
+        <mat-icon [svgIcon]="isExpanded ? 'chevron-up' : 'chevron-down'"></mat-icon>
+      </button>
+    </div>
+    <!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <p class="bold">No existe configuración de area</p>
+    </div> -->
+  </div>
+
+  <div class="detail" [@toggle]="isExpanded ? 'expanded' : 'collapsed'">
+    <!-- HEADERS -->
+    <div class="row middle-xs center-xs mt-40">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p class="bold">Nombre</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p class="bold">Correo</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p class="bold">Género</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p class="bold">Motivo de viaje</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p class="bold">Edad</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p class="bold">Habitación</p>
+      </div>
+    </div>
+
+    <!-- ROWS -->
+
+    <div class="mt-20 row-data">
+      <mat-divider></mat-divider>
+      <div class="row middle-xs center-xs mt-10">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p class="name">Lilia Guzmán Alcántara</p>
+        </div>
+        <div
+          class="col-xs-2 col-sm-2 col-md-2 col-lg-2"
+          matTooltip="lilia.guzman@hotmail.com"
+        >
+          <p>lilia.guzman@hotmail.com</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>Mujer</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>Negocios</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>29</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>MH-NY 402</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-20 row-data">
+      <mat-divider></mat-divider>
+      <div class="row middle-xs center-xs mt-10">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p class="name">Andrés González Pérez</p>
+        </div>
+        <div
+          class="col-xs-2 col-sm-2 col-md-2 col-lg-2"
+          matTooltip="lilia.guzman@hotmail.com"
+        >
+          <p>andresl@gmail.com</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>Desconocido</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>Placer</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>35</p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <p>MH-NY 645</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

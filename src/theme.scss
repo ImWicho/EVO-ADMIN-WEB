@@ -1,0 +1,26 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+@import './palette.scss';
+
+@include mat.core();
+
+// LIGHT THEME
+
+$template-primary-light: mat.define-palette($md-primarycolor);
+$template-accent-light: mat.define-palette($md-customblack, A200, A100, A400);
+$template-warn-light: mat.define-palette(mat.$red-palette);
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Poppins'
+);
+
+
+$template-theme-light: mat.define-light-theme((
+  color: (
+    primary: $template-primary-light,
+    accent: $template-accent-light,
+    warn: $template-warn-light,
+    ),
+    ));
+    
+@include mat.all-component-typographies($custom-typography);
+@include mat.all-component-themes($template-theme-light);

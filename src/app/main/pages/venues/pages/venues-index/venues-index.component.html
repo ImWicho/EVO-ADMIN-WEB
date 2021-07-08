@@ -1,0 +1,75 @@
+<app-header
+  title="Concentración por Venue"
+  desc="Conoce la ocupación en tiempo real
+  de las distintas áreas"
+  image="assets/images/footfall-01.svg"
+></app-header>
+<div class="container">
+  <form [formGroup]="form">
+    <div class="row mt-20">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1>Concentración por Venue</h1>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2><mat-icon svgIcon="filter-variant"></mat-icon> Ubicación</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Organización</mat-label>
+          <mat-select formControlName="organization" (selectionChange)="getNetworks()">
+            <mat-option *ngFor="let org of organizations" [value]="org.meraki_id">
+              {{ org.organization_rename }} - {{ org.meraki_id }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Red / Venue</mat-label>
+          <mat-select formControlName="network" (selectionChange)="getAreas()">
+            <mat-option *ngFor="let net of networks" [value]="net">
+              {{ net.network_rename }} - {{ net.meraki_id }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Área</mat-label>
+          <mat-select formControlName="area">
+            <mat-option *ngFor="let area of areas" [value]="area">
+              {{ area.area_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row end-md end-lg">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 end-md end-lg">
+        <button
+          mat-flat-button
+          [disabled]="form.invalid || loading"
+          color="primary"
+          class="radius full-width"
+          [class.spinner]="loading"
+          (click)="onSubmit()"
+        >
+          Aplicar filtros
+        </button>
+      </div>
+    </div>
+  </form>
+  <section *ngIf="areaSelected && !loading">
+    <h2 class="venue-title"> {{ areaSelected.area_name }}  </h2>
+    <app-venue-card
+      [area]="areaSelected"
+      [info]="infoArea"
+    >
+    </app-venue-card>
+  </section>
+  <div class="row center-xs" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+  </div>
+</div>

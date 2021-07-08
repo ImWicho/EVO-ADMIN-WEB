@@ -1,0 +1,10 @@
+{
+  "/server": {
+  "target": "http://localhost:8888",
+  "secure": true,
+  "pathRewrite": {
+    "^/server": ""
+  },
+    "changeOrigin": true
+  }
+}

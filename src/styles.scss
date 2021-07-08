@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'grid';
+@import './colorss.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Poppins, sans-serif; }
+
+:root {
+  font-family: Poppins, sans-serif;
+}
+
+mat-form-field{ width: 100%; }
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: white;
+  animation: spinner .8s linear infinite;
+}
+
+.img-responsive{
+  width: 100%;
+  height: auto;
+}
+
+.mt-10{
+  margin-top: 10px;
+}
+
+.mt-20{
+  margin-top: 20px;
+}
+
+.mt-40{
+  margin-top: 40px;
+}
+
+.block-button{
+  width: 100%;
+}
+
+.radius{
+  border-radius: 30px !important;
+}
+
+.color-primary{
+  color: $primary;
+}
+
+.color-orange{
+  color: $orange;
+}
+
+.full-width{
+  width: 33%;
+}
+
+@media (max-width: 1024px){
+  .full-width{
+    width: 100%;
+  }
+}
+
+.no-padding{
+  padding-left: 0 !important;
+}
+
+table{
+  width: 100%;
+}

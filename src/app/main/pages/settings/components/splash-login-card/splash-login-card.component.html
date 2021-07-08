@@ -1,0 +1,41 @@
+<div class="wrapper-login">
+  <div class="login-info">
+    <img
+      [src]="config.background_image ? config.background_image : 'assets/images/bg_evo.svg'"
+      class="img-responsive max-height"
+      alt="splash"
+    />
+    <div class="row">
+      <div class="col-xs-6">
+        <p class="primary">Bienvenido</p>
+        <p class="secundary">{{ config.title }}</p>
+        <p
+          class="status"
+          [ngClass]="{
+            'color-primary': config.is_published,
+            'color-orange': !config.is_published
+          }"
+        >
+          {{ config.is_published ? "Publicado" : "Creado" }}
+        </p>
+      </div>
+      <div class="col-xs-6 row center-xs middle-xs">
+        <button mat-icon-button color="primary" (click)="goToSplash(config.id_splash)" matTooltip="Ver splash login">
+          <mat-icon svgIcon="eye"></mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="onDelete()" matTooltip="Eliminar splash login">
+          <mat-icon svgIcon="trash-can"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="publishSplash(config.id_splash, config.is_published)" [matTooltip]="config.is_published ? 'Deshabilitar splash' : 'Publicar splash'">
+          <mat-icon
+          [ngClass]="{
+            'color-primary': config.is_published,
+            'color-orange': !config.is_published
+          }"
+          [svgIcon]="config.is_published ? 'arrow-up' : 'arrow-down'"
+        ></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

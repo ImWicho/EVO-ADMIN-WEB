@@ -1,0 +1,166 @@
+<div class="bg" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="login-container" *ngIf="!isLoading">
+  <div class="login-image-container">
+    <div class="login-image-background" [ngStyle]="{'background-image': 'url(' + (splash.background_image ? splash.background_image : 'assets/images/bg_evo.svg') + ')'}"></div>
+  </div>
+  <div class="login-form-background" [ngStyle]="{'background-image': 'url(' + ((splash.background_image && responsive) ? splash.background_image : '') + ')'}">
+    <div class="login-wrap">
+      <div class="row center-xs">
+        <div class="col-xs-8 col-sm- col-md-8 col-lg-8">
+          <img [src]="splash.logo_image ? splash.logo_image : './assets/images/logo_evo.svg'" class="img-responsive" alt="logo" />
+        </div>
+      </div>
+      <div class="row center-xs mt-40">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="login-welcome-text">¡Bienvenido!</h1>
+        </div>
+      </div>
+      <form [formGroup]="form" class="mt-20">
+        <div class="row">
+          <div
+            class="col-xs-12 col-sm-12 col-md-6 col-lg-6"
+            *ngFor="let input of splash.fields"
+          >
+            <div class="row" [ngSwitch]="input.field_type">
+              <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                *ngSwitchCase="'text'"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.alias | uppercase }}</mat-label>
+                  <input
+                    matInput
+                    [placeholder]="input.alias ? input.alias : ''"
+                    [formControlName]="input.field_name"
+                  />
+                </mat-form-field>
+              </div>
+              <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                *ngSwitchCase="'number'"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.alias | uppercase }}</mat-label>
+                  <input
+                    matInput
+                    [placeholder]="input.alias ? input.alias : ''"
+                    [formControlName]="input.field_name"
+                  />
+                </mat-form-field>
+              </div>
+              <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                *ngSwitchCase="'email'"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.alias | uppercase }}</mat-label>
+                  <input
+                    matInput
+                    [placeholder]="input.alias ? input.alias : ''"
+                    [formControlName]="input.field_name"
+                  />
+                </mat-form-field>
+              </div>
+              <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                *ngSwitchCase="'date'"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.alias | uppercase }}</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    readonly
+                    [formControlName]="input.field_name"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-xs"
+                style="margin-bottom: 10px"
+                *ngSwitchCase="'option'"
+              >
+                <mat-radio-group [formControlName]="input.field_name">
+                  <mat-radio-button color="primary" [value]="1"
+                    >Másculino</mat-radio-button
+                  >
+                  <mat-radio-button color="primary" [value]="2"
+                    >Femenino</mat-radio-button
+                  >
+                  <mat-radio-button color="primary" [value]="3"
+                  >Otro</mat-radio-button
+                >
+                </mat-radio-group>
+              </div>
+              <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                *ngSwitchCase="'select'"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.alias | uppercase }}</mat-label>
+                  <mat-select [formControlName]="input.field_name">
+                    <mat-option
+                      *ngFor="let x of input.field_extras | keyvalue"
+                      [value]="x.value"
+                      >{{ x.value }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-xs mt-40">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="login()"
+              [class.spinner]="loading"
+              [disabled]="form.invalid || loading"
+            >
+              Inciar Sesión
+            </button>
+          </div>
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-xs mt-20"
+            *ngIf="splash.auth_facebook || splash.auth_google"
+          >
+            <p style="font-weight: 500">O inicia sesión con:</p>
+          </div>
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-xs mt-20"
+            *ngIf="splash.auth_facebook || splash.auth_google"
+          >
+            <div class="row center-xs">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mr-10" *ngIf="splash.auth_facebook">
+                <img
+                  (click)="loginFacebook()"
+                  src="assets/images/facebook.svg"
+                  class="img-responsive click-img"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mr-10" *ngIf="splash.auth_google">
+                <img
+                  (click)="loginGoogle()"
+                  src="assets/images/google.svg"
+                  class="img-responsive click-img"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,26 @@
+<!-- <h2 mat-dialog-title>Install Angular</h2> -->
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-xs-12 center-xs">
+      <mat-icon
+      class="big-icon"
+      [svgIcon]="data.icon + '-circle-outline'"
+      [ngClass]="{
+        'color-orange' : data.icon === 'alert',
+        'color-green' : data.icon === 'check',
+        'color-red' : data.icon === 'close'}"></mat-icon>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 center-xs">
+      <h2>{{ data.title }}</h2>
+    </div>
+    <div class="col-xs-12 center-xs">
+      <h3>{{ data.text }}</h3>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button color="primary" *ngIf="!data.hideCancel" [mat-dialog-close]="false">Cancelar</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

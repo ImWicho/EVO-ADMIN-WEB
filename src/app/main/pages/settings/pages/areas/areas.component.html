@@ -1,0 +1,243 @@
+<app-header
+  title="Datos por Área"
+  desc="Personalice los datos de análisis por cada Área."
+  image="assets/images/area.svg"
+></app-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <button routerLink="/main/settings" mat-button class="no-padding">
+        <mat-icon svgIcon="arrow-left"></mat-icon>Volver
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="form">
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2>Seleccione un Área de un Venue</h2>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Organización</mat-label>
+          <mat-select
+            formControlName="organization"
+            (selectionChange)="getNetworks()"
+          >
+            <mat-option
+              *ngFor="let org of organizations"
+              [value]="org.meraki_id"
+              >{{ org.organization_rename }} - {{ org.meraki_id }}</mat-option
+            >
+          </mat-select>
+          <mat-hint>Seleccione la organización cliente</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Red / Venue</mat-label>
+          <mat-select formControlName="network" (selectionChange)="getAreas()">
+            <mat-option *ngFor="let net of networks" [value]="net.id_network">
+              {{ net.network_rename }} - {{ net.meraki_id }}</mat-option
+            >
+          </mat-select>
+          <mat-hint>Seleccione la Red cliente</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Área</mat-label>
+          <mat-select formControlName="area" (selectionChange)="setArea()">
+            <mat-option *ngFor="let area of areas" [value]="area">{{
+              area.area_name
+            }}</mat-option>
+          </mat-select>
+          <mat-hint>Seleccione un Área definida</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <form [formGroup]="configForm">
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2>Seleccione un Área de un Venue</h2>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Capacidad máxima</mat-label>
+          <input
+            matInput
+            placeholder="Capacidad máxima"
+            formControlName="max_capacity"
+          />
+          <mat-hint>Capacidad máxima de personas</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="row">
+          <div
+            class="
+              col-xs-12 col-sm-12 col-md-6 col-lg-6
+              row
+              end-md end-lg
+              center-xs
+            "
+          >
+            <div class="wrap-man">
+              <img
+                src="assets/images/green.svg"
+                alt="green"
+                class="img-responsive"
+              />
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>De $</mat-label>
+              <input
+                matInput
+                placeholder="De $"
+                formControlName="green_limit2"
+                readonly
+              />
+              <mat-hint>Límite inferior</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>A %</mat-label>
+              <input matInput placeholder="A %" formControlName="green_limit" />
+              <mat-hint>Límite superior</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="
+              col-xs-12 col-sm-12 col-md-6 col-lg-6
+              row
+              end-md end-lg
+              center-xs
+            "
+          >
+            <div class="wrap-man">
+              <img
+                src="assets/images/yellow.svg"
+                alt="green"
+                class="img-responsive"
+              />
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>De %</mat-label>
+              <input
+                matInput
+                placeholder="De %"
+                formControlName="yellow_limit2"
+                readonly
+              />
+              <mat-hint>Límite inferior</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>A %</mat-label>
+              <input
+                matInput
+                placeholder="A %"
+                formControlName="yellow_limit"
+              />
+              <mat-hint>Límite superior</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="
+              col-xs-12 col-sm-12 col-md-6 col-lg-6
+              row
+              end-md end-lg
+              center-xs
+            "
+          >
+            <div class="wrap-man">
+              <img
+                src="assets/images/red.svg"
+                alt="green"
+                class="img-responsive"
+              />
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>De %</mat-label>
+              <input
+                matInput
+                placeholder="De %"
+                formControlName="red_limit2"
+                readonly
+              />
+              <mat-hint>Límite inferior</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>A %</mat-label>
+              <input matInput placeholder="A %" formControlName="red_limit" readonly />
+              <mat-hint>Límite superior</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="row center-xs middle-xs">
+          <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <app-get-files
+              (files)="setFiles($event)"
+              [multiple]="false"
+              accept="image/png,image/jpeg"
+              text="Selecciona una imagen"
+            ></app-get-files>
+            <app-list-files
+              [removeFile]="true"
+              [files]="files"
+              (getFiles)="setFiles($event)"
+            ></app-list-files>
+
+            <img [src]="imgbase64" class="img-responsive" alt="img" *ngIf="imgbase64">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="row center-xs mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-20">
+      <button
+        mat-stroked-button
+        routerLink="/main/settings"
+        class="block-button radius"
+        color="primary"
+      >
+        Cancelar
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-20">
+      <button
+        mat-raised-button
+        class="block-button radius"
+        (click)="onSave()"
+        color="primary"
+        [disabled]="form.invalid || configForm.invalid"
+      >
+        Aceptar
+      </button>
+    </div>
+  </div>
+</div>

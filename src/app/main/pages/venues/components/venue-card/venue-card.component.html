@@ -1,0 +1,54 @@
+<div class="card-container">
+  <div class="row middle-xs center-xs">
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+      <img
+        [src]="area.area_image || 'assets/images/shop.svg'"
+        alt="logo" class="card-image">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <p class="bold">{{ area.area_name }}</p>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <p>{{ info.respuesta?.conectados }} Dispositivos</p>
+    </div>
+    <div class="col-xs-6" *ngIf="area.green_limit === null ; else elseBlock">
+      <p class="bold error">No existe configuración de area</p>
+    </div>
+    <ng-template #elseBlock>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p>{{ info.respuesta?.personas }} Personas</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <p>{{ info.respuesta?.ocupacion_max }} max.</p>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 row middle-xs center-xs">
+        <mat-icon svgIcon="man-red"></mat-icon>&nbsp;<p class="bold">{{ info.respuesta?.ocupacion_perc }}%</p>
+      </div>
+    </ng-template>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+      <button mat-icon-button color="primary" (click)="toggle()">
+        <mat-icon [svgIcon]="isExpanded ? 'chevron-up' : 'chevron-down'"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="detail" [@toggle]="isExpanded ? 'expanded' : 'collapsed'">
+    <mat-divider></mat-divider>
+    <div class="row middle-xs center-xs">
+      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <div class="row middle-xs start-xs">
+          <ng-container *ngFor="let input of info.respuesta.campos_footfall">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="margin-top: 15px;">
+              <p class="bold blue">{{ input.nombre | addSpace}}</p>
+                <p class="m-0"><span class="bold">{{ input.valor | addSpace}}</span> {{ input.conteo }}</p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row end-xs">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button mat-button (click)="redirectAndSave(area)" color="primary">Ver detalles de Área</button>
+      </div>
+    </div>
+  </div>
+</div>

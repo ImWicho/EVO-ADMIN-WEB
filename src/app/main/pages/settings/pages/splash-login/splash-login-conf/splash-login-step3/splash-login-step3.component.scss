@@ -1,0 +1,18 @@
+.full-width{
+  width: 25%;
+}
+
+.add-button{
+  width: 250px;
+}
+
+@media (max-width: 1024px){
+  .full-width{
+    width: 100%;
+  }
+
+  .add-button{
+    width: 100%;
+  }
+
+}

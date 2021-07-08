@@ -1,0 +1,16 @@
+@import '../../../../../../colorss.scss';
+
+.title{
+  text-align: center;
+  color: $primary
+}
+
+.full-width{
+  width: 25%;
+}
+
+@media (max-width: 1024px){
+  .full-width{
+    width: 100%;
+  }
+}

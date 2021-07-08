@@ -1,0 +1,64 @@
+<h2 mat-dialog-title class="title">Integra campos personalizados dentro del Splash Login</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form">
+    <div class="row mt-40">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Selecciona el tipo de dato a ser incluido</mat-label>
+          <mat-select formControlName="type" (selectionChange)="showSelection($event)">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Selecciona el tipo de dato a ser incluido</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre del campo</mat-label>
+          <input matInput placeholder="Nombre del campo" formControlName="name" />
+          <mat-hint>Defina el nombre del campo</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-40" *ngIf="isSelect">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h2>Defina los campos de selección</h2>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 end-md end-lg">
+      <button mat-stroked-button class="add-button radius border" color="primary" (click)="addInput()">
+        Agregar opción
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-40" *ngFor="let value of valuesIndex; let i = index;">
+      <div class="row">
+        <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+          <mat-form-field appearance="outline">
+            <mat-label>Opción {{ i+1 }}</mat-label>
+            <input matInput placeholder="Opción" (keyup)="editInput(i, $event)" [value]="values[i]"/>
+            <mat-hint>Defina el nombre de la opción</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-11 col-lg-1">
+          <button mat-icon-button color="primary" (click)="deleteInput(i)">
+            <mat-icon svgIcon="trash-can-outline"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button
+    mat-stroked-button
+    [mat-dialog-close]="false"
+    color="primary"
+    class=" radius"
+  >
+    Cancelar
+  </button>
+  <button mat-raised-button class=" radius" color="primary" (click)="saveInput()" [disabled]="form.invalid">
+    Agregar
+  </button>
+</mat-dialog-actions>

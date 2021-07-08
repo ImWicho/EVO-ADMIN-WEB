@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row mt-20">
+    <mat-horizontal-stepper #stepper [linear]="true" *ngIf="!isSmall">
+      <mat-step >
+        <ng-template matStepLabel>Nombre de Splash Login</ng-template>
+        <app-splash-login-step1></app-splash-login-step1>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Datos del Splash Login</ng-template>
+        <app-splash-login-step2></app-splash-login-step2>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>!Crea tu splash Login!</ng-template>
+        <app-splash-login-step3></app-splash-login-step3>
+      </mat-step>
+    </mat-horizontal-stepper>
+    <mat-vertical-stepper #stepper *ngIf="isSmall">
+      <mat-step >
+        <ng-template matStepLabel>Nombre de Splash Login</ng-template>
+        <app-splash-login-step1></app-splash-login-step1>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Datos del Splash Login</ng-template>
+        <app-splash-login-step2></app-splash-login-step2>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>!Crea tu splash Login!</ng-template>
+        <app-splash-login-step3></app-splash-login-step3>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</div>

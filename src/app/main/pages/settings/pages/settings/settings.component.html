@@ -1,0 +1,61 @@
+<app-header
+  title="Configuración EVO"
+  desc="Configura los espacios y datos de tu organización."
+  image="assets/images/config.svg"
+></app-header>
+<div class="container">
+  <div class="row mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 separator-right">
+      <div class="wrap-content">
+        <p>
+          En estas secciones configura espacios, dispositivos y datos de
+          análisis de lugares a ser monitoreados por la organización.
+        </p>
+        <div class="row mt-20 center-xs">
+          <div class="col-xs-6">
+            <button
+              mat-raised-button
+              routerLink="/main/settings/spaces"
+              class="block-button radius"
+              color="primary"
+            >
+              Jerarquia de espacios
+            </button>
+          </div>
+        </div>
+        <div class="row mt-20 center-xs">
+          <div class="col-xs-6">
+            <button
+              mat-raised-button
+              routerLink="/main/settings/areas"
+              class="block-button radius"
+              color="primary"
+            >
+              Datos de análisis por área
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 separator-left">
+      <div class="wrap-content">
+        <p>
+          En esta sección configura datos de consumo de los usuarios que hacen
+          uso de la red WiFi de la organización.
+        </p>
+        <div class="row mt-20 center-xs">
+          <div class="col-xs-6">
+            <button
+              mat-raised-button
+              routerLink="/main/settings/splash-login"
+              class="block-button radius"
+              color="primary"
+            >
+              Splash Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

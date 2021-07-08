@@ -1,0 +1,228 @@
+<app-header
+  title="Concentración por Área"
+  desc="Ten presente la ocupación  y las horas 
+  pico de cada lugar"
+  image="assets/images/footfall-02.svg"
+></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <button routerLink="/main/venues" mat-button class="no-padding">
+        <mat-icon svgIcon="arrow-left"></mat-icon> {{ area?.area_name }}
+      </button>
+    </div>
+  </div>
+  <div class="row mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card-container">
+        <div class="row middle-xs">
+          <div class="col-xs-4 col-sm-4 col-md-1 col-lg-1">
+            <img
+              [src]="
+                area?.area_image ? area?.area_image : 'assets/images/shop.svg'
+              "
+              alt="logo"
+              class="card-image"
+            />
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-11 col-lg-11">
+            <p class="bold">{{ area?.area_name }}</p>
+          </div>
+        </div>
+        <div class="row center-xs middle-xs">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <p class="bold">10 Dispositivos</p>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <p class="bold">11 Personas</p>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <p>Ocupación Máxima: 50</p>
+          </div>
+          <div
+            class="
+              col-xs-12 col-sm-12 col-md-3 col-lg-3
+              row
+              center-xs
+              middle-xs
+            "
+          >
+            <mat-icon svgIcon="man-green"></mat-icon>&nbsp;
+            <p class="bold">20%</p>
+          </div>
+        </div>
+        <div class="row center-xs">
+          <div
+            class="col-xs-12 col-sm-12 col-md-2 col-lg-2"
+            *ngFor="let x of data; let i = index"
+          >
+            <app-chart-card [data]="x" [label]="labels[i]"></app-chart-card>
+          </div>
+          <!-- <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <app-chart-card></app-chart-card>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <app-chart-card></app-chart-card>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <app-chart-card></app-chart-card>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <app-chart-card></app-chart-card>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>Consulta la concentración histórica de un área</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2><mat-icon svgIcon="filter-variant"></mat-icon> Filtros</h2>
+    </div>
+  </div>
+
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <p class="bold">Medida de tiempo</p>
+      </div>
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <mat-radio-group formControlName="type" (change)="changeType($event)">
+          <mat-radio-button color="primary" [value]="1"
+            >Rango de horas por día</mat-radio-button
+          >
+          <mat-radio-button class="m-l" color="primary" [value]="2"
+            >Rango de fechas</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <p class="bold">Fecha</p>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="date1" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" *ngIf="range">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker2" [min]="minDate" [max]="maxDate" formControlName="date2" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" *ngIf="!range">
+        <mat-form-field appearance="outline">
+          <mat-label>Hora</mat-label>
+          <mat-select formControlName="hour1">
+            <mat-option *ngFor="let hour of hours" [value]="hour">
+              {{hour}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" *ngIf="!range">
+        <mat-form-field appearance="outline">
+          <mat-label>Hora</mat-label>
+          <mat-select formControlName="hour2">
+            <mat-option *ngFor="let hour of hours" [value]="hour">
+              {{hour}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 end-md eng-lg">
+        <button
+          mat-stroked-button
+          color="primary"
+          class="radius full-width"
+          [disabled]="form.invalid"
+          (click)="test()"
+        >
+          Descargar
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card-container">
+        <div class="row center-xs">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p class="bold">Hora con mayor recurrencia</p>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p class="bold">Ocupación pico estimada</p>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p class="bold">Ocupación mas baja estimada</p>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p class="bold">Entradas totales</p>
+          </div>
+        </div>
+        <div class="row center-xs mt-20">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p class="bold">{{ range ? "04/02/2021" : "11:00 AM" }}</p>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <mat-icon svgIcon="green-row"></mat-icon>&nbsp;
+            <p class="bold">20 personas a las 11:15 AM</p>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <mat-icon svgIcon="red-row"></mat-icon>&nbsp;
+            <p class="bold">09 personas a las 12:00 PM</p>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p class="bold">104</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 300px;">
+      <ngx-charts-bar-vertical *ngIf="range"
+      [scheme]="colorScheme"
+      [results]="normal"
+      [legend]="true"
+      legendTitle="Resultados"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="true"
+    >
+    </ngx-charts-bar-vertical>
+
+    <ngx-charts-bar-vertical-2d *ngIf="!range"
+    [scheme]="colorScheme2"
+    [results]="multi"
+    [legend]="true"
+    legendTitle="Resultados"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [gradient]="true"
+  >
+  </ngx-charts-bar-vertical-2d>
+    </div>
+  </div>
+</div>

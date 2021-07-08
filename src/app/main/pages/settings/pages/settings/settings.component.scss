@@ -1,0 +1,19 @@
+.wrap-content{
+  padding: 15px;
+}
+
+.separator-left{
+  border-left: 1px solid #E0E0E0;
+  padding-left: 0;
+}
+
+.separator-right{
+  border-right: 1px solid #E0E0E0;
+  padding-right: 0;
+}
+
+@media (max-width: 1024px){
+  .separator{
+    border: none;
+  }
+}

@@ -1,0 +1,10 @@
+<app-toolbar class="mat-elevation-z6" [isSmall]="isSmall"></app-toolbar>
+<mat-drawer-container class="mat-drawer-custom">
+  <mat-drawer mode="over" #matDrawer>
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-footer></app-footer>

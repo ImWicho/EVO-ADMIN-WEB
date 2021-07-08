@@ -1,0 +1,31 @@
+.full-width{
+  width: 25%;
+}
+
+.add-button{
+  width: 250px;
+}
+
+@media (max-width: 1024px){
+  .full-width{
+    width: 100%;
+  }
+
+  .add-button{
+    width: 100%;
+  }
+
+}
+
+.mt-25{
+  margin-top: 25px;
+}
+
+.mr-10{
+  margin-right: 10px;
+}
+
+.ml-10{
+  margin-left: 10px;
+}
+

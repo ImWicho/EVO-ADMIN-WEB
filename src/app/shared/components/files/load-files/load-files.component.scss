@@ -1,0 +1,25 @@
+.fileDrop {
+  cursor: pointer;
+  height: 300px;
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.wrap-drag{
+  position: relative;
+  height: 300px;
+  border: 1px solid #C1C1C1;
+}
+
+.drag-text{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

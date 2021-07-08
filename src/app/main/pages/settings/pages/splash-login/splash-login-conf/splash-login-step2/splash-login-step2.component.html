@@ -1,0 +1,226 @@
+<div class="mt-20">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Indica los campos de personalización de Splash Login.</h1>
+    </div>
+  </div>
+  <form [formGroup]="form">
+    <div class="row center-xs mt-20">
+      <div
+        class="col-xs-3 col-sm-3 col-md-1 col-lg-1 mr-10"
+      >
+        <img
+          src="assets/images/facebook.svg"
+          class="img-responsive"
+          alt=""
+          srcset=""
+        />
+        <mat-checkbox formControlName="facebook" color="primary"
+          >Integrar</mat-checkbox
+        >
+      </div>
+      <div
+        class="col-xs-3 col-sm-3 col-md-1 col-lg-1 ml-10"
+      >
+        <img
+          src="assets/images/google.svg"
+          class="img-responsive"
+          alt=""
+          srcset=""
+        />
+        <mat-checkbox formControlName="google" color="primary"
+          >Integrar</mat-checkbox
+        >
+      </div>
+    </div>
+    <div class="row mt-20">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>Indica los campos que se solicitarán para el acceso.</h2>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-20">
+            <div class="row">
+              <div class="col-xs-12"><p>Habilita registro Nombre</p></div>
+              <div class="col-xs-12">
+                <mat-slide-toggle
+                  color="primary"
+                  formControlName="nombre"
+                ></mat-slide-toggle>
+              </div>
+              <div class="col-xs-12">
+                <mat-checkbox formControlName="nombreRequired" color="primary"
+                  >Obligatorio</mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-20">
+            <div class="row">
+              <div class="col-xs-12"><p>Habilita registro Género</p></div>
+              <div class="col-xs-12">
+                <mat-slide-toggle
+                  #gender
+                  color="primary"
+                  (change)="addGender($event.checked)"
+                ></mat-slide-toggle>
+              </div>
+              <div class="col-xs-12">
+                <mat-checkbox color="primary" (change)="toggleRequiredInputByName('Género')"
+                  >Obligatorio</mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-20">
+            <div class="row">
+              <div class="col-xs-12">
+                <p>Habilita registro Correo Electrónico</p>
+              </div>
+              <div class="col-xs-12">
+                <mat-slide-toggle
+                  color="primary"
+                  formControlName="email"
+                ></mat-slide-toggle>
+              </div>
+              <div class="col-xs-12">
+                <mat-checkbox formControlName="emailRequired" color="primary"
+                  >Obligatorio</mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-20">
+            <div class="row">
+              <div class="col-xs-12">
+                <p>Habilita registro Fecha de Nacimiento</p>
+              </div>
+              <div class="col-xs-12">
+                <mat-slide-toggle
+                #birthday
+                (change)="addBirthday($event.checked)"
+                  color="primary"
+                ></mat-slide-toggle>
+              </div>
+              <div class="col-xs-12">
+                <mat-checkbox
+                  (change)="toggleRequiredInputByName('Fecha Nacimiento')"
+                  color="primary"
+                  >Obligatorio</mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-40">
+        <div class="row">
+          <div class="row col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h2>Puedes crear nuevos campos dentro del Splash Login.</h2>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 end-md end-lg">
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="openDialog()"
+              class="radius full-width"
+              [disabled]="!canAddInput"
+              [matTooltipDisabled]="canAddInput"
+              matTooltip="Ya no se pueden agregar más campos."
+            >
+              Nuevo
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-25"
+            *ngFor="let input of inputs"
+          >
+            <div class="row" [ngSwitch]="input.type">
+              <div class="col-xs-12">
+                <mat-slide-toggle color="primary" [checked]="input.enabled" (change)="toggleEnable(input.id)"
+                  >Deshabilita registro {{ input.name }}</mat-slide-toggle
+                >
+              </div>
+              <div class="col-xs-11" *ngSwitchCase="'select'">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.name }}</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let x of input.values" [value]="x">{{
+                      x
+                    }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xs-11" *ngSwitchCase="'text'">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.name }}</mat-label>
+                  <input matInput [placeholder]="input.name" />
+                </mat-form-field>
+              </div>
+              <div class="col-xs-11" *ngSwitchCase="'number'">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.name }}</mat-label>
+                  <input matInput [placeholder]="input.name" />
+                </mat-form-field>
+              </div>
+              <div class="col-xs-11" *ngSwitchCase="'date'">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ input.name }}</mat-label>
+                  <input matInput [matDatepicker]="picker" readonly />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-xs-1">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  (click)="deleteInput(input.id)"
+                >
+                  <mat-icon svgIcon="trash-can-outline"></mat-icon>
+                </button>
+              </div>
+              <div class="col-xs-12">
+                <mat-checkbox
+                  [checked]="input.required"
+                  (change)="toggleRequired(input.id)"
+                  color="primary"
+                  >Obligatorio</mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row center-md center-lg mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-20">
+      <button
+        mat-stroked-button
+        matStepperPrevious
+        color="primary"
+        class="block-button radius"
+      >
+        Atrás
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-20">
+      <button
+        mat-raised-button
+        matStepperNext
+        class="block-button radius"
+        (click)="onSubmit()"
+        [disabled]="form.invalid"
+        color="primary"
+      >
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>

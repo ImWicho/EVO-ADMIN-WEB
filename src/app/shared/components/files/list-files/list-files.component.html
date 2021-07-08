@@ -1,0 +1,12 @@
+<div *ngFor="let file of files; let idx = index">
+  <button class="file-box" mat-flat-button color="primary">
+    <mat-icon [matTooltip]="file.name" svgIcon="file"></mat-icon>
+    {{ file.name | slice:0:10 }}
+    <mat-icon
+      class="icon-close"
+      svgIcon="close-circle"
+      (click)="deleteFile(idx)"
+      *ngIf="removeFile"
+    ></mat-icon>
+  </button>
+</div>

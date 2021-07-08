@@ -1,0 +1,39 @@
+@import '../../../../../../colorss.scss';
+
+.card-container{
+  background-color: #e9e9e9;
+  width: 95%;
+  margin: 20px auto;
+  padding: 10px 30px;
+  border-radius: 5px;
+  user-select: none;
+
+  .shadow{
+    border-bottom: 3px solid $primary;
+  }
+
+  .border{
+    border-bottom: 1px solid #cecbcb;
+  }
+
+  p{
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .bold{
+    font-weight: 500;
+  }
+
+  .detail{
+    overflow: hidden;
+
+    .blue{
+      color: $primary;
+    }
+
+    .m-0{
+      margin: 0;
+    }
+  }
+}

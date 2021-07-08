@@ -1,0 +1,99 @@
+<div class="mt-20">
+  <h1>Indica los campos de personalización de Splash Login.</h1>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Título</mat-label>
+              <input matInput placeholder="Título" formControlName="name" />
+              <mat-hint>Nombre del Splash</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-12 mt-20">
+            <mat-form-field appearance="outline">
+              <mat-label>Subtítulo</mat-label>
+              <input
+                matInput
+                placeholder="Subtítulo"
+                formControlName="subname"
+              />
+              <mat-hint>Subnombre del Splash</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-12 mt-20">
+            <mat-form-field appearance="outline">
+              <mat-label>Máximo de tiempo para navegar</mat-label>
+              <mat-select formControlName="days">
+                <mat-option value="1">1 día</mat-option>
+                <mat-option value="3">3 días</mat-option>
+                <mat-option value="7">1 semana</mat-option>
+                <mat-option value="30">1 mes</mat-option>
+                <mat-option value="90">90 días</mat-option>
+              </mat-select>
+              <mat-hint>Máximo de tiempo para navegar.</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="row center-xs">
+          <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 mt-20">
+            <app-get-files
+              [multiple]="false"
+              accept="image/png,image/jpeg"
+              text="Selecciona imagen de fondo"
+              (files)="setFiles1($event)"
+            ></app-get-files>
+            <app-list-files
+              [removeFile]="true"
+              [files]="files1"
+              (getFiles)="setFiles1($event)"
+            ></app-list-files>
+            <img [src]="imgbase641" class="img-responsive" alt="img" *ngIf="imgbase641">
+          </div>
+          <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 mt-20">
+            <app-get-files
+              [multiple]="false"
+              accept="image/png,image/jpeg"
+              text="Selecciona logotipo"
+              (files)="setFiles2($event)"
+            ></app-get-files>
+            <app-list-files
+              [removeFile]="true"
+              [files]="files2"
+              (getFiles)="setFiles2($event)"
+            ></app-list-files>
+            <img [src]="imgbase642" class="img-responsive" alt="img" *ngIf="imgbase642">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="row center-md center-lg mt-20">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-20">
+      <button
+        mat-stroked-button
+        (click)="onRemoveConf()"
+        color="primary"
+        class="block-button radius"
+      >
+        Cancelar
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-20">
+      <button
+        mat-raised-button
+        matStepperNext
+        class="block-button radius"
+        (click)="onSubmit()"
+        [disabled]="form.invalid"
+        color="primary"
+      >
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>

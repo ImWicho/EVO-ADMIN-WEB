@@ -1,0 +1,35 @@
+<mat-toolbar>
+  <div class="toolbar row between-xs">
+    <button mat-icon-button *ngIf="isSmall" (click)="toogleSideNav()">
+      <mat-icon class="color-icon" svgIcon="menu"></mat-icon>
+    </button>
+    <div class="wrap-image" (click)="toMainView()">
+      <img src="./assets/images/eon_logo.svg" class="img-responsive" alt="logo">
+    </div>
+    <div *ngIf="!isSmall">
+      <button mat-button [mat-menu-trigger-for]="menu1">Venues <mat-icon svgIcon="menu-down"></mat-icon></button>
+      <mat-menu #menu1="matMenu">
+       <button mat-menu-item routerLink="/main/venues">
+         <mat-icon svgIcon="pencil"></mat-icon>
+         <span>Venues</span>
+       </button>
+     </mat-menu>
+      <button mat-button>Clientes y Visitas <mat-icon svgIcon="menu-down"></mat-icon></button>
+    </div>
+    <div *ngIf="!isSmall">
+     <button mat-button routerLink="/main/settings/splash-login">Splash Login</button>
+     <button mat-icon-button routerLink="/main/settings">
+       <mat-icon class="color-icon" svgIcon="cog-outline"></mat-icon>
+     </button>
+     <button mat-icon-button>
+       <mat-icon class="color-icon" svgIcon="bell-outline"></mat-icon>
+     </button>
+     <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon class="color-icon" svgIcon="menu-down"></mat-icon> Administrador <mat-icon svgIcon="account-circle"></mat-icon>
+     </button>
+     <mat-menu #menu="matMenu">
+       <button mat-menu-item (click)="logOut()"><mat-icon svgIcon="exit-to-app"></mat-icon>Cerrar sesión</button>
+     </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
